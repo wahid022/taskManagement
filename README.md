@@ -1,12 +1,59 @@
-# React + Vite
+📝 Task Management Application
+Task Management Application is a web-based productivity tool built with React that helps users organize, track, and manage their daily tasks efficiently. This application allows users to add new tasks, mark them as complete or incomplete, delete tasks, and filter them based on their status (All, Active, Completed)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+🚀 Project Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This Task Manager is designed to help users organize their daily workflow by keeping track of their to-dos. It demonstrates key React concepts like components, props, state, hooks (`useState`, `useEffect`), and conditional rendering. With a clean and intuitive UI, it supports task filtering, task completion toggling, and data persistence.
 
-## Expanding the ESLint configuration
+The project was completed as part of a 5-day assignment to evaluate practical skills in React development.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+⚙️ Setup Instructions
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/user-name/taskManagement.git
+   cd taskManagement
+   npm i
+   
+---
+
+⚙️ Core Features
+
+Add new tasks with title and optional description
+Mark tasks as complete or incomplete
+Delete tasks from the list
+Display list of all tasks
+Filter tasks by status: All, Active, Completed
+Persist tasks using localStorage
+Load saved tasks on application start
+Responsive design for desktop, tablet, and mobile devices
+
+---
+
+📌 Assumptions & Design Decisions
+
+Title is required, description is optional for task creation
+Tasks are uniquely identified by timestamps
+No backend used; all data is stored locally in the browser
+Minimal third-party dependencies to keep the project lightweight
+Prioritized clean, readable UI over advanced UI frameworks
+
+---
+
+⚠️ Challenges Faced & Solutions
+
+1. State Synchronization with localStorage
+Challenge: Ensuring tasks update instantly while remaining in sync with localStorage
+Solution: Used useEffect to watch task state changes and update localStorage accordingly
+
+2. Responsive Design
+Challenge: Making the UI work well across different screen sizes
+Solution: Used media queries and flexible layouts with CSS Flexbox
+
+3. Filtering Without Breaking Task State
+Challenge: Applying filters while maintaining original task state
+Solution: Used state to manage the current filter and derived the filtered list dynamically
