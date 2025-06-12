@@ -1,40 +1,105 @@
 .form {
+  width: 100%;
+  max-width: 100%;
+  background: linear-gradient(to right, #e0f7fa, #e1bee7);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  animation: fadeIn 0.5s ease-in-out;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.heading {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #4a148c;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.row {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input,
+.select {
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border-radius: 14px;
+  border: 2px solid #d0e6ff;
+  flex: 1 1 200px;
   background-color: #ffffff;
-  padding: 1.5rem;
-  border-radius: 16px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
 }
 
-input, textarea {
-  padding: 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
-}
-
-input:focus, textarea:focus {
-  border-color: #4facfe;
+.input:focus,
+.select:focus {
   outline: none;
+  border-color: #7b1fa2;
+  box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.2);
 }
 
-button {
-  padding: 0.8rem 1.2rem;
-  background-color: #4facfe; /* Use a solid brand color */
-  border: none;
-  border-radius: 12px;
-  color: white;
-  font-weight: 600;
+.textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
   font-size: 1rem;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  border-radius: 14px;
+  border: 2px solid #d0e6ff;
+  min-height: 120px;
+  resize: vertical;
+  background-color: #ffffff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
 }
 
-button:hover {
-  background-color: #369dff;
-  transform: translateY(-1px);
+.textarea:focus {
+  outline: none;
+  border-color: #7b1fa2;
+  box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.2);
+}
+
+.button {
+  background: linear-gradient(to right, #8e24aa, #7b1fa2);
+  color: white;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 14px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  margin-top: 1rem;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(123, 31, 162, 0.3);
+}
+
+@media (max-width: 600px) {
+  .form {
+    padding: 1rem;
+  }
 }

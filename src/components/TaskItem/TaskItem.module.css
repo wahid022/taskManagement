@@ -1,18 +1,23 @@
 .card {
-  background: #fff;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   padding: 1rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease;
+  transition: transform 0.2s;
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .card:hover {
-  transform: translateY(-2px);
+  transform: scale(1.01);
 }
 
 .topRow {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 0.5rem;
   margin-bottom: 0.5rem;
 }
@@ -21,11 +26,53 @@
   accent-color: #4caf50;
 }
 
-.priority {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
+.topRow h3 {
+  margin: 0;
+  font-size: 1rem;
+  flex: 1;
+  text-align: left;
+}
+
+.statusSwapBtn {
+  background-color: #3f51b5;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: background 0.3s;
+}
+
+.statusSwapBtn:hover {
+  background-color: #303f9f;
+}
+
+.description {
+  min-height: 40px;
+  max-height: 80px;
+  overflow-y: auto;
+  margin: 0.5rem 0;
+  color: #444;
+}
+
+.completedText {
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+.priorityButtons {
+  margin: 0.5rem 0;
+}
+
+.priorityTag {
   display: inline-block;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: white;
+  text-transform: capitalize;
 }
 
 .high {
@@ -33,18 +80,14 @@
 }
 .medium {
   background-color: #fbc02d;
+  color: #333;
 }
 .low {
   background-color: #43a047;
 }
 
-.description {
-  color: #555;
-  margin: 0.5rem 0;
-}
-
 .meta {
-  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .tag {
@@ -68,26 +111,24 @@
 }
 
 .actions {
-  margin-top: 1rem;
   display: flex;
   gap: 0.5rem;
+  margin-top: 1rem;
   justify-content: flex-end;
 }
 
 .actions button {
-  padding: 0.4rem 0.8rem;
   border: none;
+  padding: 0.4rem 0.8rem;
   border-radius: 6px;
   cursor: pointer;
-  background-color: #f9f9f9;
-  color: #333;
+  background-color: #eeeeee;
   font-weight: 500;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.2s;
 }
 
 .actions button:hover {
-  background-color: #e0e0e0;
-  color: #000;
+  background-color: #d6d6d6;
 }
 
 .delete {
@@ -98,3 +139,10 @@
 .delete:hover {
   background-color: #ef5350;
 }
+
+.datetime {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0.5rem 0;
+}
+
