@@ -4,8 +4,8 @@ import styles from "./TaskItem.module.css";
 const TaskItem = ({
   title,
   description,
-  priority, 
-  category, 
+  priority,
+  category,
   date,
   time,
   completed,
