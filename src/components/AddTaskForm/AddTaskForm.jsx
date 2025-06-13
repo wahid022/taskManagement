@@ -1,13 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./AddTaskForm.module.css";
 
-const AddTaskForm = ({ onAddTask }) => {
+const AddTaskForm = ({ onAddTask, editingTask }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("medium");
   const [category, setCategory] = useState("personal");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
+
+  useEffect(() => {
+    if (editingTask) {
+      setTitle(editingTask.title || "");
+      setDescription(editingTask.description || "");
+      setPriority(editingTask.priority || "medium");
+      setCategory(editingTask.category || "personal");
+      setDate(editingTask.date || "");
+      setTime(editingTask.time || "");
+    }
+  }, [editingTask]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,7 +36,9 @@ const AddTaskForm = ({ onAddTask }) => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <h2 className={styles.heading}>Create a New Task</h2>
+      <h2 className={styles.heading}>
+        {editingTask ? "✏️ Edit Task" : "Create a New Task"}
+      </h2>
       <div className={styles.row}>
         <input
           type="text"
@@ -77,7 +90,7 @@ const AddTaskForm = ({ onAddTask }) => {
       ></textarea>
 
       <button type="submit" className={styles.button}>
-        ➕ Add Task
+        {editingTask ? "💾 Update Task" : "➕ Add Task"}
       </button>
     </form>
   );

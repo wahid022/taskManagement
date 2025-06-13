@@ -30,7 +30,7 @@ const App = () => {
     },
   ]);
   const isFirstLoad = useRef(true);
-
+  const [editingTask, setEditingTask] = useState(null); // State to track the task being edited
   //  Load from localStorage... getting tasks from localStorage
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
@@ -76,8 +76,30 @@ const App = () => {
 
   //  Adding Task Functionalities...
   const handleAddTask = (task) => {
-    const newTask = { ...task, id: Date.now(), completed: false };
-    setTasks((prev) => [...prev, newTask]);
+    if (editingTask) {
+      handleEditTask(editingTask.id, task);
+      setEditingTask(null);
+    } else {
+      const newTask = { ...task, id: Date.now(), completed: false };
+      setTasks((prev) => [...prev, newTask]);
+    }
+  };
+
+  // Deleting Task Functionalities...
+  const handleDeleteTask = (id) => {
+    setTasks((prev) => prev.filter((task) => task.id !== id));
+  };
+
+  // Editing Task Functionalities...
+  const handleEditTask = (id, updatedData) => {
+    setTasks((prev) =>
+      prev.map((task) => (task.id === id ? { ...task, ...updatedData } : task))
+    );
+  };
+
+  // Starting Editing Task Functionalities...
+  const startEditingTask = (task) => {
+    setEditingTask(task);
   };
 
   return (
@@ -85,9 +107,14 @@ const App = () => {
       <div className={styles.contentWrapperFull}>
         <Header />
         <main className={styles.mainContent}>
-          <AddTaskForm onAddTask={handleAddTask} />
+          <AddTaskForm onAddTask={handleAddTask} editingTask={editingTask} />
+
           <FilterButtons />
-          <TaskList tasks={tasks} />
+          <TaskList
+            tasks={tasks}
+            onDelete={handleDeleteTask}
+            onEdit={startEditingTask}
+          />
         </main>
       </div>
     </div>

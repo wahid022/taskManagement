@@ -3,7 +3,7 @@ import TaskItem from "../TaskItem/TaskItem";
 import SearchBar from "../SearchBar/SearchBar";
 import styles from "./TaskList.module.css";
 
-const TaskList = ({ tasks }) => {
+const TaskList = ({ tasks, onDelete, onEdit}) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredTasks = tasks.filter(
@@ -18,9 +18,9 @@ const TaskList = ({ tasks }) => {
 
       {filteredTasks.length > 0 ? (
         <div className={styles.taskGrid}>
-          {filteredTasks.map((task, index) => (
+          {filteredTasks.map((task) => (
             <TaskItem
-              key={index}
+              key={task.id}
               title={task.title}
               description={task.description}
               priority={task.priority}
@@ -28,8 +28,8 @@ const TaskList = ({ tasks }) => {
               date={task.date}
               time={task.time}
               completed={task.completed}
-              onEdit={() => {}}
-              onDelete={() => {}}
+              onEdit={() => onEdit(task)}
+              onDelete={() => onDelete(task.id)}
               onCompleteToggle={() => {}}
             />
           ))}
