@@ -56,7 +56,7 @@ const AddTaskForm = ({ onAddTask, editingTask }) => {
       </h2>
 
       <div className={styles.row}>
-        <div className={styles.inputWrapper}>
+        <div className={styles.fieldWrapper}>
           <input
             type="text"
             placeholder="📝 Task Title"
@@ -64,10 +64,10 @@ const AddTaskForm = ({ onAddTask, editingTask }) => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          {errors.title && <p className={styles.error}>{errors.title}</p>}
+          {errors.title && <span className={styles.error}>{errors.title}</span>}
         </div>
 
-        <div className={styles.inputWrapper}>
+        <div className={styles.fieldWrapper}>
           <select
             className={styles.select}
             value={priority}
@@ -78,10 +78,10 @@ const AddTaskForm = ({ onAddTask, editingTask }) => {
             <option value="medium">⚖️ Medium</option>
             <option value="low">🌿 Low</option>
           </select>
-          {errors.priority && <p className={styles.error}>{errors.priority}</p>}
+          {errors.priority && <span className={styles.error}>{errors.priority}</span>}
         </div>
 
-        <div className={styles.inputWrapper}>
+        <div className={styles.fieldWrapper}>
           <select
             className={styles.select}
             value={category}
@@ -92,33 +92,33 @@ const AddTaskForm = ({ onAddTask, editingTask }) => {
             <option value="work">💼 Work</option>
             <option value="health">💪 Health</option>
           </select>
-          {errors.category && <p className={styles.error}>{errors.category}</p>}
+          {errors.category && <span className={styles.error}>{errors.category}</span>}
         </div>
       </div>
 
       <div className={styles.row}>
-        <div className={styles.inputWrapper}>
+        <div className={styles.fieldWrapper}>
           <input
             type="date"
             className={styles.input}
             value={date}
             onChange={(e) => setDate(e.target.value)}
           />
-          {errors.date && <p className={styles.error}>{errors.date}</p>}
+          {errors.date && <span className={styles.error}>{errors.date}</span>}
         </div>
 
-        <div className={styles.inputWrapper}>
+        <div className={styles.fieldWrapper}>
           <input
             type="time"
             className={styles.input}
             value={time}
             onChange={(e) => setTime(e.target.value)}
           />
-          {errors.time && <p className={styles.error}>{errors.time}</p>}
+          {errors.time && <span className={styles.error}>{errors.time}</span>}
         </div>
       </div>
 
-      <div className={styles.inputWrapper}>
+      <div className={styles.fieldWrapper}>
         <textarea
           placeholder="🗒️ Description"
           className={styles.textarea}
@@ -126,7 +126,7 @@ const AddTaskForm = ({ onAddTask, editingTask }) => {
           onChange={(e) => setDescription(e.target.value)}
         ></textarea>
         {errors.description && (
-          <p className={styles.error}>{errors.description}</p>
+          <span className={styles.error}>{errors.description}</span>
         )}
       </div>
 
