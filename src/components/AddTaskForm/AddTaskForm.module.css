@@ -98,6 +98,12 @@
   box-shadow: 0 8px 20px rgba(123, 31, 162, 0.3);
 }
 
+.error {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+
 @media (max-width: 600px) {
   .form {
     padding: 1rem;

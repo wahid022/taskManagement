@@ -8,6 +8,7 @@ const AddTaskForm = ({ onAddTask, editingTask }) => {
   const [category, setCategory] = useState("personal");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (editingTask) {
@@ -17,12 +18,25 @@ const AddTaskForm = ({ onAddTask, editingTask }) => {
       setCategory(editingTask.category || "personal");
       setDate(editingTask.date || "");
       setTime(editingTask.time || "");
+      setErrors({});
     }
   }, [editingTask]);
 
+  const validate = () => {
+    const newErrors = {};
+    if (!title.trim()) newErrors.title = "Title is required.";
+    if (!description.trim()) newErrors.description = "Description is required.";
+    if (!priority) newErrors.priority = "Priority is required.";
+    if (!category) newErrors.category = "Category is required.";
+    if (!date) newErrors.date = "Date is required.";
+    if (!time) newErrors.time = "Time is required.";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!title.trim()) return;
+    if (!validate()) return;
 
     onAddTask({ title, description, priority, category, date, time });
 
@@ -32,6 +46,7 @@ const AddTaskForm = ({ onAddTask, editingTask }) => {
     setCategory("personal");
     setDate("");
     setTime("");
+    setErrors({});
   };
 
   return (
@@ -39,55 +54,81 @@ const AddTaskForm = ({ onAddTask, editingTask }) => {
       <h2 className={styles.heading}>
         {editingTask ? "✏️ Edit Task" : "Create a New Task"}
       </h2>
+
       <div className={styles.row}>
-        <input
-          type="text"
-          placeholder="📝 Task Title"
-          className={styles.input}
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <select
-          className={styles.select}
-          value={priority}
-          onChange={(e) => setPriority(e.target.value)}
-        >
-          <option value="high">🔥 High</option>
-          <option value="medium">⚖️ Medium</option>
-          <option value="low">🌿 Low</option>
-        </select>
-        <select
-          className={styles.select}
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        >
-          <option value="personal">👤 Personal</option>
-          <option value="work">💼 Work</option>
-          <option value="health">💪 Health</option>
-        </select>
+        <div className={styles.inputWrapper}>
+          <input
+            type="text"
+            placeholder="📝 Task Title"
+            className={styles.input}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          {errors.title && <p className={styles.error}>{errors.title}</p>}
+        </div>
+
+        <div className={styles.inputWrapper}>
+          <select
+            className={styles.select}
+            value={priority}
+            onChange={(e) => setPriority(e.target.value)}
+          >
+            <option value="">Select Priority</option>
+            <option value="high">🔥 High</option>
+            <option value="medium">⚖️ Medium</option>
+            <option value="low">🌿 Low</option>
+          </select>
+          {errors.priority && <p className={styles.error}>{errors.priority}</p>}
+        </div>
+
+        <div className={styles.inputWrapper}>
+          <select
+            className={styles.select}
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <option value="">Select Category</option>
+            <option value="personal">👤 Personal</option>
+            <option value="work">💼 Work</option>
+            <option value="health">💪 Health</option>
+          </select>
+          {errors.category && <p className={styles.error}>{errors.category}</p>}
+        </div>
       </div>
 
       <div className={styles.row}>
-        <input
-          type="date"
-          className={styles.input}
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-        />
-        <input
-          type="time"
-          className={styles.input}
-          value={time}
-          onChange={(e) => setTime(e.target.value)}
-        />
+        <div className={styles.inputWrapper}>
+          <input
+            type="date"
+            className={styles.input}
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
+          {errors.date && <p className={styles.error}>{errors.date}</p>}
+        </div>
+
+        <div className={styles.inputWrapper}>
+          <input
+            type="time"
+            className={styles.input}
+            value={time}
+            onChange={(e) => setTime(e.target.value)}
+          />
+          {errors.time && <p className={styles.error}>{errors.time}</p>}
+        </div>
       </div>
 
-      <textarea
-        placeholder="🗒️ Description (optional)"
-        className={styles.textarea}
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      ></textarea>
+      <div className={styles.inputWrapper}>
+        <textarea
+          placeholder="🗒️ Description"
+          className={styles.textarea}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        ></textarea>
+        {errors.description && (
+          <p className={styles.error}>{errors.description}</p>
+        )}
+      </div>
 
       <button type="submit" className={styles.button}>
         {editingTask ? "💾 Update Task" : "➕ Add Task"}

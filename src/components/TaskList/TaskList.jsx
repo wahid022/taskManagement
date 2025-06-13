@@ -3,7 +3,7 @@ import TaskItem from "../TaskItem/TaskItem";
 import SearchBar from "../SearchBar/SearchBar";
 import styles from "./TaskList.module.css";
 
-const TaskList = ({ tasks, onDelete, onEdit}) => {
+const TaskList = ({ tasks, onDelete, onEdit, onCompleteToggle }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredTasks = tasks.filter(
@@ -30,7 +30,7 @@ const TaskList = ({ tasks, onDelete, onEdit}) => {
               completed={task.completed}
               onEdit={() => onEdit(task)}
               onDelete={() => onDelete(task.id)}
-              onCompleteToggle={() => {}}
+              onCompleteToggle={() => onCompleteToggle(task.id)}
             />
           ))}
         </div>

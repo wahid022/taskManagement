@@ -31,6 +31,8 @@ const App = () => {
   ]);
   const isFirstLoad = useRef(true);
   const [editingTask, setEditingTask] = useState(null); // State to track the task being edited
+  const [filter, setFilter] = useState("All");
+
   //  Load from localStorage... getting tasks from localStorage
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
@@ -102,6 +104,22 @@ const App = () => {
     setEditingTask(task);
   };
 
+  // Filter Tasks Functionalities...
+  const filteredTasks = tasks.filter((task) => {
+    if (filter === "completed") return task.completed;
+    if (filter === "pending") return !task.completed;
+    return true; // all
+  });
+
+  // Toggle Task Completion Functionalities...
+  const handleToggleComplete = (id) => {
+    setTasks((prev) =>
+      prev.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
+      )
+    );
+  };
+
   return (
     <div className={styles.appContainer}>
       <div className={styles.contentWrapperFull}>
@@ -109,11 +127,12 @@ const App = () => {
         <main className={styles.mainContent}>
           <AddTaskForm onAddTask={handleAddTask} editingTask={editingTask} />
 
-          <FilterButtons />
+          <FilterButtons currentFilter={filter} onFilterChange={setFilter} />
           <TaskList
-            tasks={tasks}
+            tasks={filteredTasks}
             onDelete={handleDeleteTask}
             onEdit={startEditingTask}
+            onCompleteToggle={handleToggleComplete}
           />
         </main>
       </div>
