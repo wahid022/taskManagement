@@ -30,7 +30,7 @@ const App = () => {
     },
   ]);
   const isFirstLoad = useRef(true);
-  const [editingTask, setEditingTask] = useState(null); // State to track the task being edited
+  const [editingTask, setEditingTask] = useState(null);
   const [filter, setFilter] = useState("All");
 
   //  Load from localStorage... getting tasks from localStorage
@@ -50,29 +50,35 @@ const App = () => {
 
   //  Alarm Functionality... checking for tasks that need reminders
   useEffect(() => {
-    const interval = setInterval(() => {
+    const notifiedTaskIds = new Set();
+
+    const checkAlarm = () => {
       const now = new Date();
       const currentTime = now.toTimeString().slice(0, 5);
       const today = now.toISOString().split("T")[0];
 
-      tasks.forEach(async (task) => {
+      tasks.forEach((task) => {
         if (
           !task.completed &&
           task.date === today &&
-          task.time === currentTime
+          task.time === currentTime &&
+          !notifiedTaskIds.has(task.id)
         ) {
-          try {
-            const audio = new Audio("/assets/alarm-clock-90867.mp3");
-            await audio.play(); // Play the alarm sound
-          } catch (err) {
-            console.warn("Audio failed to play:", err);
-          }
+          notifiedTaskIds.add(task.id);
 
-          alert(`⏰ Reminder: ${task.title}`); // Alert the user
+          // Play sound
+          const audio = new Audio("/assets/alarmMusic.mp3");
+          audio.play().catch((err) => console.warn("Audio play failed:", err));
+
+          // Delay the alert just a bit (e.g., 100ms) to let audio start
+          setTimeout(() => {
+            alert(`⏰ Reminder: ${task.title}`);
+          }, 100);
         }
       });
-    }, 60000);
+    };
 
+    const interval = setInterval(checkAlarm, 60000);
     return () => clearInterval(interval);
   }, [tasks]);
 
