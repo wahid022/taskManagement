@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Header from "./components/Header/Header";
 import AddTaskForm from "./components/AddTaskForm/AddTaskForm";
 import FilterButtons from "./components/FilterButtons/FilterButtons";
 import TaskList from "./components/TaskList/TaskList";
 import styles from "./App.module.css";
 
+const LOCAL_STORAGE_KEY = "taskManagerTasks";
 const App = () => {
   const [tasks, setTasks] = useState([
     {
@@ -28,22 +29,44 @@ const App = () => {
       completed: false,
     },
   ]);
+  const isFirstLoad = useRef(true);
 
-  const [filter, setFilter] = useState("all");
+  //  Load from localStorage... getting tasks from localStorage
+  useEffect(() => {
+    const storedTasks = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    if (storedTasks) setTasks(storedTasks);
+  }, []);
 
+  // Save to localStorage... saving tasks to localStorage
+  useEffect(() => {
+    if (isFirstLoad.current) {
+      isFirstLoad.current = false;
+      return;
+    }
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasks));
+  }, [tasks]);
+
+  //  Alarm Functionality... checking for tasks that need reminders
   useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date();
       const currentTime = now.toTimeString().slice(0, 5);
       const today = now.toISOString().split("T")[0];
 
-      tasks.forEach((task) => {
+      tasks.forEach(async (task) => {
         if (
           !task.completed &&
           task.date === today &&
           task.time === currentTime
         ) {
-          alert(`⏰ Reminder: ${task.title}`);
+          try {
+            const audio = new Audio("/assets/alarm-clock-90867.mp3");
+            await audio.play(); // Play the alarm sound
+          } catch (err) {
+            console.warn("Audio failed to play:", err);
+          }
+
+          alert(`⏰ Reminder: ${task.title}`); // Alert the user
         }
       });
     }, 60000);
@@ -57,15 +80,14 @@ const App = () => {
     setTasks((prev) => [...prev, newTask]);
   };
 
-
   return (
     <div className={styles.appContainer}>
       <div className={styles.contentWrapperFull}>
         <Header />
         <main className={styles.mainContent}>
           <AddTaskForm onAddTask={handleAddTask} />
-          <FilterButtons filter={filter} setFilter={setFilter} />
-          <TaskList tasks={tasks}/>
+          <FilterButtons />
+          <TaskList tasks={tasks} />
         </main>
       </div>
     </div>
