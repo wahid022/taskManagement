@@ -1,0 +1,125 @@
+.form {
+  width: 100%;
+  max-width: 100%;
+  background: linear-gradient(to right, #e0f7fa, #e1bee7);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  animation: fadeIn 0.5s ease-in-out;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.heading {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #4a148c;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  justify-content: space-between; 
+  box-sizing: border-box;
+}
+
+.halfWidth {
+  flex: 1 1 calc(50% - 1rem); 
+  max-width: calc(50% - 1rem);
+}
+
+.input,
+.select {
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border-radius: 14px;
+  border: 2px solid #d0e6ff;
+  flex: 1 1 auto;
+  width: 100%;
+  max-width: 240px; 
+  background-color: #ffffff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+.input:focus,
+.select:focus {
+  outline: none;
+  border-color: #7b1fa2;
+  box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.2);
+}
+
+.textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border-radius: 14px;
+  border: 2px solid #d0e6ff;
+  min-height: 120px;
+  resize: vertical;
+  background-color: #ffffff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: #7b1fa2;
+  box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.2);
+}
+
+.button {
+  background: linear-gradient(to right, #8e24aa, #7b1fa2);
+  color: white;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 14px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  margin-top: 1rem;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(123, 31, 162, 0.3);
+}
+
+.fieldWrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.error {
+  color: red;
+  font-size: 0.75rem;
+  margin-top: 2px;
+  padding-left: 2px;
+}
+
+@media (max-width: 600px) {
+  .form {
+    padding: 1rem;
+  }
+}

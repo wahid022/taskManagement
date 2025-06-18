@@ -1,0 +1,24 @@
+.appContainer {
+  background: linear-gradient(to bottom right, #e3f2fd, #e0f7fa);
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+.contentWrapperFull {
+  width: 100%;
+  flex: 1;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
