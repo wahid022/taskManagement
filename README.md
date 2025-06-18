@@ -1,59 +1,131 @@
-📝 Task Management Application
-Task Management Application is a web-based productivity tool built with React that helps users organize, track, and manage their daily tasks efficiently. This application allows users to add new tasks, mark them as complete or incomplete, delete tasks, and filter them based on their status (All, Active, Completed)
+# 📝 Task Management Application
+
+A web-based productivity tool built with **React** and **Vite** to help users organize, track, and manage daily tasks efficiently. Users can add, edit, delete, search, filter, and mark tasks as complete or incomplete. The app features reminders with sound, category and priority tagging, and data persistence via localStorage.
 
 ---
 
-🚀 Project Description
+## 🚀 Features
 
-This Task Manager is designed to help users organize their daily workflow by keeping track of their to-dos. It demonstrates key React concepts like components, props, state, hooks (`useState`, `useEffect`), and conditional rendering. With a clean and intuitive UI, it supports task filtering, task completion toggling, and data persistence.
-
-The project was completed as part of a 5-day assignment to evaluate practical skills in React development.
+- **Add new tasks** with title, description, priority, category, date, and time
+- **Edit existing tasks** inline
+- **Delete tasks** from the list
+- **Mark tasks as complete/incomplete** (checkbox or button)
+- **Filter tasks** by status: All, Active, Completed
+- **Search tasks** by title or description
+- **Category and priority tags** for each task
+- **Reminders**: Plays a sound and shows an alert when a task is due
+- **Responsive design** for desktop, tablet, and mobile
+- **Data persistence**: Tasks are saved in localStorage
 
 ---
 
-⚙️ Setup Instructions
+## 📁 Project Structure
+
+```
+├── public/
+│   ├── vite.svg
+│   └── assets/
+│       └── alarmMusic.mp3
+├── src/
+│   ├── App.jsx
+│   ├── App.module.css
+│   ├── index.css
+│   ├── main.jsx
+│   ├── assets/
+│   │   └── react.svg
+│   └── components/
+│       ├── AddTaskForm/
+│       │   ├── AddTaskForm.jsx
+│       │   └── AddTaskForm.module.css
+│       ├── FilterButtons/
+│       │   ├── FilterButtons.jsx
+│       │   └── FilterButtons.module.css
+│       ├── Header/
+│       │   ├── Header.jsx
+│       │   └── Header.module.css
+│       ├── SearchBar/
+│       │   ├── SearchBar.jsx
+│       │   └── SearchBar.module.css
+│       ├── TaskItem/
+│       │   ├── TaskItem.jsx
+│       │   └── TaskItem.module.css
+│       └── TaskList/
+│           ├── TaskList.jsx
+│           └── TaskList.module.css
+├── index.html
+├── package.json
+├── vite.config.js
+├── eslint.config.js
+└── README.md
+```
+
+---
+
+## ⚙️ Setup Instructions
 
 1. **Clone the repository**
    ```bash
    git clone https://github.com/user-name/taskManagement.git
    cd taskManagement
-   npm i
-   
----
+   npm install
+   ```
 
-⚙️ Core Features
+2. **Run the development server**
+   ```bash
+   npm run dev
+   ```
 
-Add new tasks with title and optional description
-Mark tasks as complete or incomplete
-Delete tasks from the list
-Display list of all tasks
-Filter tasks by status: All, Active, Completed
-Persist tasks using localStorage
-Load saved tasks on application start
-Responsive design for desktop, tablet, and mobile devices
+3. **Build for production**
+   ```bash
+   npm run build
+   ```
 
----
-
-📌 Assumptions & Design Decisions
-
-Title is required, description is optional for task creation
-Tasks are uniquely identified by timestamps
-No backend used; all data is stored locally in the browser
-Minimal third-party dependencies to keep the project lightweight
-Prioritized clean, readable UI over advanced UI frameworks
+4. **Preview the production build**
+   ```bash
+   npm run preview
+   ```
 
 ---
 
-⚠️ Challenges Faced & Solutions
+## 🧩 Main Components
 
-1. State Synchronization with localStorage
-Challenge: Ensuring tasks update instantly while remaining in sync with localStorage
-Solution: Used useEffect to watch task state changes and update localStorage accordingly
+- [`App`](src/App.jsx): Main application logic, state management, and alarm/reminder functionality.
+- [`Header`](src/components/Header/Header.jsx): App title and subtitle.
+- [`AddTaskForm`](src/components/AddTaskForm/AddTaskForm.jsx): Form for adding and editing tasks.
+- [`FilterButtons`](src/components/FilterButtons/FilterButtons.jsx): Filter tasks by status.
+- [`SearchBar`](src/components/SearchBar/SearchBar.jsx): Search tasks by title or description.
+- [`TaskList`](src/components/TaskList/TaskList.jsx): Displays the filtered and searched list of tasks.
+- [`TaskItem`](src/components/TaskItem/TaskItem.jsx): Individual task card with actions.
 
-2. Responsive Design
-Challenge: Making the UI work well across different screen sizes
-Solution: Used media queries and flexible layouts with CSS Flexbox
+---
 
-3. Filtering Without Breaking Task State
-Challenge: Applying filters while maintaining original task state
-Solution: Used state to manage the current filter and derived the filtered list dynamically
+## 📌 Assumptions & Design Decisions
+
+- **Title** is required; other fields are validated as needed.
+- **Tasks are uniquely identified** by timestamp-based IDs.
+- **No backend**: All data is stored in the browser (localStorage).
+- **Minimal dependencies**: Only React, Vite, and ESLint-related packages.
+- **Reminders**: Play a sound and show an alert when a task is due (if the browser tab is open).
+- **Responsive UI**: Uses CSS modules and flexbox for layout.
+
+---
+
+## ⚠️ Challenges & Solutions
+
+1. **State Synchronization with localStorage**
+   - Used `useEffect` to keep tasks in sync with localStorage.
+
+2. **Reminders/Alarms**
+   - Used `setInterval` to check for due tasks every minute and play a sound/alert.
+
+3. **Filtering and Searching**
+   - Combined filter and search logic in [`TaskList`](src/components/TaskList/TaskList.jsx) for a seamless user experience.
+
+4. **Responsive Design**
+   - Used CSS modules and media queries for mobile/tablet support.
+
+---
+
+## 🛠️ Linting & Formatting
+
+- ESLint is configured via [`eslint.config.js`](eslint.config.js) for code quality and React best practices.
